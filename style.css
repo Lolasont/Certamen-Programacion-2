@@ -99,50 +99,59 @@ button:hover {
     box-shadow: 0 10px 20px rgba(15, 118, 110, 0.2);
 }
 
-/* Tabla */
+/* Tabla corporativa seria */
 table {
     width: 100%;
     max-width: 1000px;
     border-collapse: collapse;
     background: white;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+    border: 1px solid #cbd5e1;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
-/* Caption */
+/* Título */
 caption {
     text-align: left;
-    padding: 20px;
-    font-size: 1.3rem;
-    font-weight: bold;
+    padding: 18px;
+    font-size: 1.1rem;
+    font-weight: 700;
     background: #111827;
     color: white;
+    border-bottom: 1px solid #374151;
 }
 
-/* Header tabla */
+/* Encabezado */
 thead {
-    background: #1e293b;
+    background: #1f2937;
     color: white;
 }
 
 th {
-    padding: 16px;
+    padding: 15px;
     text-align: left;
+    font-size: 0.95rem;
     font-weight: 600;
+    border-right: 1px solid #374151;
 }
 
 /* Celdas */
 td {
-    padding: 16px;
-    border-bottom: 1px solid #e2e8f0;
-    color: #334155;
+    padding: 14px;
+    border-top: 1px solid #e5e7eb;
+    border-right: 1px solid #e5e7eb;
+    color: #374151;
+    font-size: 0.94rem;
 }
 
-/* Hover filas */
+/* Quitar borde derecho final */
+th:last-child,
+td:last-child {
+    border-right: none;
+}
+
+/* Hover elegante */
 tbody tr:hover {
-    background: #f8fafc;
-    transition: 0.2s ease;
+    background: #f9fafb;
 }
 
 /* Footer */
