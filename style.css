@@ -49,6 +49,15 @@ form {
     border-radius: 18px;
     box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
     border: 1px solid #dbe2ea;
+
+    display: flex;              /* agregado */
+    flex-direction: column;     /* agregado */
+    gap: 10px;                  /* agregado */
+}
+
+/* Contenedor de campos */
+.contenedor > div {
+    margin-bottom: 12px;        /* reemplaza <br> */
 }
 
 /* Labels */
@@ -63,7 +72,7 @@ label {
 input {
     width: 100%;
     padding: 14px;
-    margin-bottom: 22px;
+    margin-bottom: 5px;         /* ajustado */
     border: 1px solid #cbd5e1;
     border-radius: 12px;
     background: #f8fafc;
@@ -99,7 +108,12 @@ button:hover {
     box-shadow: 0 10px 20px rgba(15, 118, 110, 0.2);
 }
 
-/* Tabla corporativa seria */
+/* Click botón */
+button:active {
+    transform: scale(0.98);     /* agregado */
+}
+
+/* Tabla corporativa */
 table {
     width: 100%;
     max-width: 1000px;
@@ -107,6 +121,10 @@ table {
     background: white;
     border: 1px solid #cbd5e1;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+
+    margin-top: 20px;           /* agregado */
+    border-radius: 12px;        /* agregado */
+    overflow: hidden;           /* agregado */
 }
 
 /* Título */
@@ -152,6 +170,11 @@ td:last-child {
 /* Hover elegante */
 tbody tr:hover {
     background: #f9fafb;
+}
+
+/* Filas alternadas */
+tbody tr:nth-child(even) {
+    background: #f1f5f9;        /* agregado */
 }
 
 /* Footer */
