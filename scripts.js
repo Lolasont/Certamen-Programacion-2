@@ -10,6 +10,7 @@ const inputBusqueda = document.getElementById('busqueda');
 const errorNombre = document.getElementById('errorNombre');
 const errorApellido = document.getElementById('errorApellido');
 const errorCargo = document.getElementById('errorCargo');
+const errorCorreo = document.getElementById('errorCorreo')
 
 //Arreglos Principales
 let colaboradores = [];
@@ -23,21 +24,30 @@ function validarCampo(campo, errorElemento) {
         return false;
     }
 
+    if (valor.length < 3) {
+        errorElemento.textContent = 'El campo no puede tener menos de 3 caracteres';
+        return false;
+    }
+
     errorElemento.textContent = '';
     return true;
 }
 
 //Validacion del correo
-function validarCorreo() {
-    const correo = inputCorreo.value.trim();
-    const spanError = document.getElementById('errorCorreo');
+function validarCorreo(campo, errorElemento) {
+    const correo = campo.value.trim();
 
-    if (!correo.includes('@') || !correo.endsWith('@empresa.cl')) {
-        spanError.textContent = 'El correo debe tener el dominio @empresa.cl';
+    if (correo === '') {
+        errorElemento.textContent = 'El campo no puede estar vacío';
         return false;
     }
 
-    spanError.textContent = '';
+    if (!correo.includes('@') || !correo.endsWith('@empresa.cl')) {
+        errorElemento.textContent = 'El correo debe tener el dominio @empresa.cl';
+        return false;
+    }
+
+    errorElemento.textContent = '';
     return true;
 }
 
@@ -121,11 +131,12 @@ function filtrarColaboradores(texto) {
 
 btn.addEventListener('click', (e) => {
     e.preventDefault();
-    if (!validarCampo(inputNombre,errorNombre)) return;
-    if (!validarCampo(inputApellido,errorApellido)) return;
-    if (!validarCampo(inputCargo,errorCargo)) return;
-    if (!validarCorreo()) return;
-    
+   const val_nombre = validarCampo(inputNombre,errorNombre);
+   const val_apellido = validarCampo(inputApellido,errorApellido);
+   const val_cargo = validarCampo(inputCargo,errorCargo);
+   const val_correo = validarCorreo(inputCorreo,errorCorreo);
+
+    if (!val_nombre || !val_apellido|| !val_cargo || !val_correo) return;
 
     colaboradores.push(crearColaborador());
     renderizarTabla(colaboradores);
