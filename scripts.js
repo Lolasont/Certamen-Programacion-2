@@ -1,53 +1,110 @@
-const inputNombre = document.getElementById('nombre')
-const inputApellido = document.getElementById('apellido')
-const inputCargo = document.getElementById('cargo')
-const inputCorreo = document.getElementById('correo')
-const datosTabla = document.getElementById('tablaColaboradores')
-const btn = document.getElementById('botonEnviar')
+//Variables para el DOM
+const inputNombre = document.getElementById('nombre');
+const inputApellido = document.getElementById('apellido');
+const inputCargo = document.getElementById('cargo');
+const inputCorreo = document.getElementById('correo');
+const seccionTabla = document.getElementById('tablaColaboradores');
+const btn = document.getElementById('botonEnviar');
+const inputBusqueda = document.getElementById('busqueda');
 
+//Arreglos Principales
+let colaboradores = [];
+let idContador = 0;
 
-function datos_usuario(nombre,apellido,cargo,correo){
-    nombre = inputNombre.value.trim();
-    apellido = inputApellido.value.trim();
-    cargo = inputCargo.value.trim()
-    correo = inputCorreo.value.trim()
+//Validacion del correo
+function validarCorreo() {
+    const correo = inputCorreo.value.trim();
+    const spanError = document.getElementById('errorCorreo');
 
-    let datosUsuario = {
-        nombre: nombre,
-        apellido: apellido,
-        cargo: cargo,
-        correo: correo
+    if (!correo.includes('@') || !correo.endsWith('@empresa.cl')) {
+        spanError.textContent = 'El correo debe tener el dominio @empresa.cl';
+        return false;
     }
-    console.log(datosUsuario)
+
+    spanError.textContent = '';
+    return true;
 }
 
-function renderizarTabla(nombre){
-    const caption = document.getElementById('tablaColaboradores')
-    caption.innerHTML = "" 
-    colaboradores.forEach((colaborador,index) => {
-        const table = document.createElement("table")
-        const caption = document.createElement("caption")
-        const thead = document.createElement("thead")
-        const tr = document.createElement("tr")
-        const th = document.createElement("th")
-        const tbody = document.createElement("tbody")
-        const td = document.createElement(td)
-        caption.textContent = "Colaboradores registrados"
-        th.textContent = "Nombre"
-        th.textContent = "Apellido"
-        th.textContent = "Cargo"
-        th.textContent = "Correo corporativo"
-        table.appendChild(caption)
-        caption.appendChild(thead)
-        thead.appendChild(tr)
-        tr.appendChild(th)
-        table.appendChild(tbody)
-        tbody.appendChild(td)
+
+//Crear objeto colaborador
+function crearColaborador(){
+    idContador++;
+    return {
+        id: idContador,
+        nombre: inputNombre.value.trim(),
+        apellido: inputApellido.value.trim(),
+        cargo: inputCargo.value.trim(),
+        correo: inputCorreo.value.trim()
+    };
+}
+
+//Funcion paral impiar el formulario
+function limpiarFormulario(){
+    inputNombre.value = '';
+    inputApellido.value = '';
+    inputCargo.value = '',
+    inputCorreo.value = '';
+}
+
+//Renderizar la tabla
+function renderizarTabla(lista) {
+    seccionTabla.innerHTML = '';
+
+    if (lista.length === 0) return;
+
+    const table = document.createElement("table");
+    const caption = document.createElement("caption");
+    const thead = document.createElement("thead");
+    const tbody = document.createElement("tbody");
+
+    caption.textContent = 'Colaboradores registrados';
+    table.appendChild(caption);
+
+    const trHead = document.createElement('tr');
+    ['Nombre','Apellido','Cargo','Correo corporativo'].forEach(texto => {
+        const th = document.createElement('th');
+        th.textContent = texto;
+        trHead.appendChild(th);
     });
+    thead.appendChild(trHead);
+    table.appendChild(thead);
 
+    lista.forEach(colaborador => {
+        const tr = document.createElement('tr');
+
+        ['nombre','apellido','cargo','correo'].forEach(campo => {
+            
+        const td = document.createElement('td');
+        td.textContent = colaborador[campo];
+        tr.appendChild(td);
+        });
+
+        const tdBtn = document.createElement('td');
+        const btnEliminar = document.createElement('button');
+        btnEliminar.textContent = 'Eliminar';
+        btnEliminar.classList.add('btn-eliminar');
+        btnEliminar.addEventListener('click', () => eliminarColaborador(colaborador.id));
+        tdBtn.appendChild(btnEliminar);
+        tr.appendChild(tdBtn);
+        tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    seccionTabla.appendChild(table)
 }
 
-btn.addEventListener("click",(e)=>{
-e.preventDefault
-datos_usuario(inputNombre,inputApellido,inputCargo,inputCorreo)
-})
+function eliminarColaborador(id){
+    colaboradores = colaboradores.filter(c => c.id !== id);
+    renderizarTabla(colaboradores)
+}
+
+
+btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (!validarCorreo()) return;
+
+    colaboradores.push(crearColaborador());
+    renderizarTabla(colaboradores);
+    limpiarFormulario();
+});
+
+

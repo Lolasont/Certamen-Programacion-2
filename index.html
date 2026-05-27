@@ -34,12 +34,16 @@
                 <div class="campoEmail">
                     <label for="correo">Correo corporativo:</label>
                     <input type="email" id="correo" name="correo" placeholder="Ingrese correo nombre@empresa.cl" required>
+                    <div id="errorCorreo" class="errorCorreo"></div>
                 </div>
 
                 <button type="submit" id="botonEnviar">Registrar</button>
 
             </div>
         </form>
+        <div class="campoBusqueda">
+            <input type="text" id="busqueda" placeholder="buscar por nombre o cargo...">
+        </div>
         <section id="tablaColaboradores">
         </section>
     </main>

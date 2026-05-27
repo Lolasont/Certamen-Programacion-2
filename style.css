@@ -183,3 +183,24 @@ footer {
     background: #111827;
     margin-top: auto;
 }
+
+.btn-eliminar {
+    width: auto;
+    padding: 7px 14px;
+    background: linear-gradient(135deg, #dc2626, #991b1b);
+    font-size: 0.85rem;
+}
+
+.btn-eliminar:hover {
+    box-shadow: 0 6px 14px rgba(220, 38, 38, 0.3);
+}
+
+.campoBusqueda {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.errorCorreo{
+    color: #dc2626;
+    font-size: 0.82rem;
+}
