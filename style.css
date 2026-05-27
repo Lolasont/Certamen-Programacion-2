@@ -199,7 +199,18 @@ footer {
     width: 100%;
     max-width: 1000px;
 }
-
+.errorNombre{
+    color: #dc2626;
+    font-size: 0.82rem;
+}
+.errorApellido{
+    color: #dc2626;
+    font-size: 0.82rem;
+}
+.errorCargo{
+    color: #dc2626;
+    font-size: 0.82rem;
+}
 .errorCorreo{
     color: #dc2626;
     font-size: 0.82rem;

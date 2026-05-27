@@ -7,9 +7,25 @@ const seccionTabla = document.getElementById('tablaColaboradores');
 const btn = document.getElementById('botonEnviar');
 const inputBusqueda = document.getElementById('busqueda');
 
+const errorNombre = document.getElementById('errorNombre');
+const errorApellido = document.getElementById('errorApellido');
+const errorCargo = document.getElementById('errorCargo');
+
 //Arreglos Principales
 let colaboradores = [];
 let idContador = 0;
+
+function validarCampo(campo, errorElemento) {
+    const valor = campo.value.trim();
+
+    if (valor === '') {
+        errorElemento.textContent = 'El campo no puede estar vacío';
+        return false;
+    }
+
+    errorElemento.textContent = '';
+    return true;
+}
 
 //Validacion del correo
 function validarCorreo() {
@@ -24,7 +40,6 @@ function validarCorreo() {
     spanError.textContent = '';
     return true;
 }
-
 
 //Crear objeto colaborador
 function crearColaborador(){
@@ -97,14 +112,27 @@ function eliminarColaborador(id){
     renderizarTabla(colaboradores)
 }
 
+function filtrarColaboradores(texto) {
+    return colaboradores.filter(c =>
+        c.nombre.toLowerCase().includes(texto.toLowerCase()) ||
+        c.cargo.toLowerCase().includes(texto.toLowerCase())
+    );
+}
 
 btn.addEventListener('click', (e) => {
     e.preventDefault();
+    if (!validarCampo(inputNombre,errorNombre)) return;
+    if (!validarCampo(inputApellido,errorApellido)) return;
+    if (!validarCampo(inputCargo,errorCargo)) return;
     if (!validarCorreo()) return;
+    
 
     colaboradores.push(crearColaborador());
     renderizarTabla(colaboradores);
     limpiarFormulario();
 });
 
+inputBusqueda.addEventListener('input', () => {
+    renderizarTabla(filtrarColaboradores(inputBusqueda.value));
+});
 
