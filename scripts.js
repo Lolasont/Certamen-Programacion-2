@@ -30,10 +30,10 @@ function validarCampo(campo, errorElemento) {
         errorElemento.textContent = 'El campo no puede tener menos de 3 caracteres';
         return false;
     }
-    //validar que no tenga numeros
+    //validar que no tenga numeros ni simbolos
     const regex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
     if (!regex.test(valor)) {
-        errorElemento.textContent = 'El campo no puede contener números';
+        errorElemento.textContent = 'El campo solo puede contener letras';
         return false;
     }
     //si pasa validacion
@@ -55,7 +55,7 @@ function validarCorreo(campo, errorElemento) {
         errorElemento.textContent = 'Correo inválido (debe ser @empresa.cl)';
         return false;
     }
-    if (colaboradores.some(c => c.correo === correo)) {
+    if (colaboradores.some(c => c.correo.toLowerCase() === correo.toLowerCase())) {
         errorElemento.textContent = 'No se puede repetir correo';
         return false;
     }
@@ -103,7 +103,7 @@ function renderizarTabla(lista) {
     //encabezado
     const trHead = document.createElement('tr');
 
-    ['Nombre','Apellido','Cargo','Correo corporativo','Boton eliminar'].forEach(texto => {
+    ['Nombre','Apellido','Cargo','Correo corporativo','Botón eliminar'].forEach(texto => {
         const th = document.createElement('th');
         th.textContent = texto;
         trHead.appendChild(th);
