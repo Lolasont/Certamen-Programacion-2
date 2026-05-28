@@ -36,6 +36,11 @@ function validarCampo(campo, errorElemento) {
         errorElemento.textContent = 'El campo solo puede contener letras';
         return false;
     }
+    //validar largo maximo
+    if (valor.length > 80) {
+        errorElemento.textContent = 'El campo no puede superar los 80 caracteres';
+        return false;
+    }
     //si pasa validacion
     errorElemento.textContent = '';
     return true;
@@ -59,6 +64,10 @@ function validarCorreo(campo, errorElemento) {
         errorElemento.textContent = 'No se puede repetir correo';
         return false;
     }
+    if (correo.length > 100) {
+        errorElemento.textContent = 'El correo no puede superar los 100 caracteres';
+        return false;
+    }
     errorElemento.textContent = '';
     return true;
 }
@@ -72,7 +81,7 @@ function crearColaborador(){
         nombre: inputNombre.value.trim(),
         apellido: inputApellido.value.trim(),
         cargo: inputCargo.value.trim(),
-        correo: inputCorreo.value.trim()
+        correo: inputCorreo.value.toLowerCase().trim()
     };
 }
 

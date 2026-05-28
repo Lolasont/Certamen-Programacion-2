@@ -131,6 +131,7 @@ table {
     margin-top: 20px; /* espacio arriba */
     border-radius: 12px; /* bordes */
     overflow: hidden; /* cortar contenido */
+    table-layout: fixed; /* evita que la tabla se deforme por contenido largo */
 }
 
 /* titulo tabla */
@@ -166,6 +167,9 @@ td {
     border-right: 1px solid #e5e7eb; /* borde lado */
     color: #374151; /* color texto */
     font-size: 0.94rem; /* tamaño */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 200px;
 }
 
 /* quitar ultimo borde */
